@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.CrossCollisionBlock;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.RedstoneTorchBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TripWireHookBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,6 +59,8 @@ public final class Clusters {
 	private static final List<IntegerProperty> VANILLA_STACKING = List.of(BlockStateProperties.CANDLES,
 			BlockStateProperties.PICKLES, BlockStateProperties.FLOWER_AMOUNT, BlockStateProperties.SEGMENT_AMOUNT,
 			BlockStateProperties.EGGS);
+
+	private static final Set<String> EXCLUDED_PROPERTIES = Set.of("age", "thickness", "flower_amount", "segment_amount");
 
 	private Clusters() {
 	}
@@ -88,7 +92,8 @@ public final class Clusters {
 				ELIGIBLE.add(block);
 			}
 		}
-		Baukunst.LOGGER.info("{} kleine Blöcke lassen sich zu viert kombinieren", ELIGIBLE.size());
+		Baukunst.LOGGER.info("{} kleine Blöcke lassen sich zu viert kombinieren: {}", ELIGIBLE.size(),
+				ELIGIBLE.stream().map(b -> BuiltInRegistries.BLOCK.getKey(b).getPath()).sorted().toList());
 
 		UseBlockCallback.EVENT.register(Clusters::onUse);
 		PlayerBlockBreakEvents.BEFORE.register((level, player, pos, state, blockEntity) ->
@@ -102,13 +107,21 @@ public final class Clusters {
 		if (block instanceof EntityBlock || block instanceof ButtonBlock || block instanceof LeverBlock
 				|| block instanceof RedstoneTorchBlock || block instanceof TripWireHookBlock || block instanceof FlowerPotBlock
 				|| block instanceof DiodeBlock || block instanceof BaseRailBlock
-				|| block instanceof LadderBlock) {
+				|| block instanceof LadderBlock
+				// connect to their neighbours – would look broken inside a quarter
+				|| block instanceof CrossCollisionBlock || block instanceof WallBlock) {
 			return false;
 		}
 		if (!(block.asItem() instanceof BlockItem item) || item.getBlock() != block) {
 			return false;
 		}
 		BlockState state = block.defaultBlockState();
+		for (var property : state.getProperties()) {
+			// growing plants, multi-part dripstone, and blocks that already fill quarters themselves
+			if (EXCLUDED_PROPERTIES.contains(property.getName())) {
+				return false;
+			}
+		}
 		if (state.getRenderShape() != RenderShape.MODEL || state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)
 				|| state.hasProperty(BlockStateProperties.BED_PART)) {
 			return false;

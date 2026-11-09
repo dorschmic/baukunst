@@ -82,7 +82,7 @@ public class ClusterClientTest implements FabricClientGameTest {
 						{Blocks.LANTERN, Blocks.OXEYE_DAISY, Blocks.CORNFLOWER, Blocks.TORCH},
 						{Blocks.RED_TULIP, Blocks.ORANGE_TULIP, Blocks.WHITE_TULIP, Blocks.PINK_TULIP},
 						{Blocks.SOUL_LANTERN, Blocks.LILY_OF_THE_VALLEY, Blocks.AZURE_BLUET, Blocks.BROWN_MUSHROOM},
-						{Blocks.FERN, Blocks.SHORT_GRASS, Blocks.OAK_SAPLING, Blocks.CHERRY_SAPLING},
+						{Blocks.SOUL_TORCH, Blocks.WITHER_ROSE, Blocks.RED_MUSHROOM, Blocks.END_ROD},
 				};
 				for (int x = -3; x <= 3; x++) {
 					for (int z = -2; z <= 2; z++) {

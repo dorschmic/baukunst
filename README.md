@@ -45,7 +45,7 @@ Stämme, Laub, Glas, Terrakotta, Erze, Eis, Kupfer …
 ### Kleinkram: bis zu 4 kleine Blöcke in einem Feld
 ![Kleinkram](docs/small_block_clusters.png)
 
-Kleine Vanilla-Blöcke – Blumen, Setzlinge, Pilze, Farne, Laternen, Fackeln, Ketten, Kerzen … – passen zu viert in ein Blockfeld,
+Kleine Vanilla-Blöcke – Blumen, Pilze, Laternen, Fackeln, Ketten, Kerzen, Blitzableiter … (72 Stück) – passen zu viert in ein Blockfeld,
 ein Stück pro Viertel (wie Laubstreu oder Rosa Blütenblätter).
 
 - **Ein** kleiner Block steht ganz normal in der Mitte.
@@ -54,7 +54,8 @@ ein Stück pro Viertel (wie Laubstreu oder Rosa Blütenblätter).
 - Die Blöcke behalten ihre **Originalgröße** und ihr Aussehen; eine Laterne im Feld leuchtet weiter.
 - **Abbauen** entfernt nur den Block, auf den du schaust. Bleibt einer übrig, wandert er zurück in die Mitte und ist wieder ein normaler Block.
 - Kerzen, Seegurken, Blütenblätter und Schildkröteneier stapeln sich wie gewohnt, wenn du denselben Block daraufklickst.
-- Ausgenommen sind Redstone-Teile, Schienen, Leitern, Blumentöpfe, zweiteilige Pflanzen und Blöcke mit Inventar.
+- Ausgenommen sind Blöcke, die breiter als ein Viertel sind (Setzlinge, Farne, Gras), wachsende Pflanzen, Zäune, Mauern,
+  Glasscheiben, Redstone-Teile, Schienen, Leitern, Blumentöpfe, zweiteilige Pflanzen und Blöcke mit Inventar.
 
 > Hinweis: Die Mod muss auf Client **und** Server installiert sein. Entfernt man sie, werden vertikale Stufen wieder zu normalen Stufen.
 
