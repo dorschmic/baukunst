@@ -9,7 +9,8 @@
 			"de.dorschmic.baukunst.test.VerticalSlabClientTest",
 			"de.dorschmic.baukunst.test.MiniBlockClientTest",
 			"de.dorschmic.baukunst.test.ShapedBlockClientTest",
-			"de.dorschmic.baukunst.test.ClusterClientTest"
+			"de.dorschmic.baukunst.test.ClusterClientTest",
+			"de.dorschmic.baukunst.test.BreakOneClientTest"
 		]
 	},
 	"depends": {

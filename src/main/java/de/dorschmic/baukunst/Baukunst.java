@@ -36,6 +36,7 @@ public class Baukunst implements ModInitializer {
 		ShapedBlocks.init();
 		ShapedBlockTabs.init();
 		Clusters.init();
+		BlockEntityResync.init();
 
 		LOGGER.info("Baukunst geladen – viel Spaß beim schön Bauen!");
 	}

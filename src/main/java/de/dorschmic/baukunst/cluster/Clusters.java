@@ -1,6 +1,7 @@
 package de.dorschmic.baukunst.cluster;
 
 import de.dorschmic.baukunst.Baukunst;
+import de.dorschmic.baukunst.BlockEntityResync;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -240,6 +242,9 @@ public final class Clusters {
 		int slot = targetedSlot(player, pos, cluster);
 		BlockState removed = cluster.get(slot);
 		cluster.set(slot, null);
+		if (level instanceof ServerLevel serverLevel) {
+			BlockEntityResync.schedule(serverLevel, pos);
+		}
 		if (removed != null) {
 			if (!player.isCreative()) {
 				Block.popResource(level, pos, dropFor(removed));

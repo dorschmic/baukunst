@@ -54,6 +54,9 @@ public final class MiniGrid {
 			int slot = targetedSlot(player, pos, grid);
 			Block source = grid.get(slot);
 			grid.set(slot, null);
+			if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+				de.dorschmic.baukunst.BlockEntityResync.schedule(serverLevel, pos);
+			}
 			MiniBlock mini = source == null ? null : MiniBlocks.forSource(source);
 			if (mini != null && !player.isCreative()) {
 				Block.popResource(level, pos, new ItemStack(mini));
