@@ -11,7 +11,8 @@
 			"de.dorschmic.baukunst.test.ShapedBlockClientTest",
 			"de.dorschmic.baukunst.test.ClusterClientTest",
 			"de.dorschmic.baukunst.test.BreakOneClientTest",
-			"de.dorschmic.baukunst.test.WorldEditClientTest"
+			"de.dorschmic.baukunst.test.WorldEditClientTest",
+			"de.dorschmic.baukunst.test.MixedSlabClientTest"
 		]
 	},
 	"depends": {

@@ -2,6 +2,7 @@ package de.dorschmic.baukunst;
 
 import de.dorschmic.baukunst.cluster.Clusters;
 import de.dorschmic.baukunst.mini.MiniBlocks;
+import de.dorschmic.baukunst.mixed.MixedSlabs;
 import de.dorschmic.baukunst.shapes.ShapedBlockTabs;
 import de.dorschmic.baukunst.shapes.ShapedBlocks;
 import de.dorschmic.baukunst.slab.VerticalModePayload;
@@ -36,6 +37,7 @@ public class Baukunst implements ModInitializer {
 		ShapedBlocks.init();
 		ShapedBlockTabs.init();
 		Clusters.init();
+		MixedSlabs.init();
 		BlockEntityResync.init();
 
 		LOGGER.info("Baukunst geladen – viel Spaß beim schön Bauen!");

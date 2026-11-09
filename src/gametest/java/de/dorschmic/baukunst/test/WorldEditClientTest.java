@@ -59,6 +59,10 @@ public class WorldEditClientTest implements FabricClientGameTest {
 				ClusterBlockEntity cluster = (ClusterBlockEntity) level.getBlockEntity(o.south().east());
 				cluster.set(0, Blocks.LANTERN.defaultBlockState());
 				cluster.set(3, Blocks.END_ROD.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.EAST));
+				// Mixed slab, side by side: oak on the east half, stone on the west half.
+				level.setBlockAndUpdate(o.offset(2, 0, 1), de.dorschmic.baukunst.mixed.MixedSlabs.BLOCK.defaultBlockState()
+						.setValue(de.dorschmic.baukunst.mixed.MixedSlabBlock.FACING, Direction.EAST));
+				((de.dorschmic.baukunst.mixed.MixedSlabBlockEntity) level.getBlockEntity(o.offset(2, 0, 1))).set(Blocks.OAK_SLAB, Blocks.STONE_SLAB);
 				return o;
 			});
 
@@ -119,6 +123,13 @@ public class WorldEditClientTest implements FabricClientGameTest {
 				check(fc.get(1) != null && fc.get(1).is(Blocks.LANTERN) && fc.get(2) != null
 						&& fc.get(2).getValue(BlockStateProperties.FACING) == Direction.WEST, "cluster contents mirror");
 				check(level.getBlockState(flipped.offset(-1, 0, 0)).getValue(StairBlock.FACING) == Direction.NORTH, "stairs mirror");
+
+				// Mixed slab (2,0,1): rotated to (-1,0,2) with oak now on the south half; flipped to (-2,0,1) with oak west.
+				var mixedFacing = de.dorschmic.baukunst.mixed.MixedSlabBlock.FACING;
+				check(level.getBlockEntity(plain.offset(2, 0, 1)) instanceof de.dorschmic.baukunst.mixed.MixedSlabBlockEntity m
+						&& m.first() == Blocks.OAK_SLAB && m.second() == Blocks.STONE_SLAB, "paste keeps mixed slab");
+				check(level.getBlockState(rotated.offset(-1, 0, 2)).getValue(mixedFacing) == Direction.SOUTH, "mixed slab rotates");
+				check(level.getBlockState(flipped.offset(-2, 0, 1)).getValue(mixedFacing) == Direction.WEST, "mixed slab mirrors");
 			});
 		}
 	}

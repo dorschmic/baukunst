@@ -6,5 +6,8 @@
 	"block.baukunst.mini": "Mini %s",
 	"itemGroup.baukunst.mini_blocks": "Mini Blocks",
 	"block.baukunst.slab": "%s Slab",
-	"block.baukunst.stairs": "%s Stairs"
+	"block.baukunst.stairs": "%s Stairs",
+	"block.baukunst.mixed_slab": "Mixed Slabs",
+	"block.baukunst.cluster": "Small Blocks",
+	"block.baukunst.mini_grid": "Mini Block Grid"
 }

@@ -1,7 +1,9 @@
 package de.dorschmic.baukunst.client.mini;
 
 import de.dorschmic.baukunst.client.cluster.ClusterStateModel;
+import de.dorschmic.baukunst.client.mixed.MixedSlabStateModel;
 import de.dorschmic.baukunst.cluster.Clusters;
+import de.dorschmic.baukunst.mixed.MixedSlabs;
 import de.dorschmic.baukunst.mini.MiniBlock;
 import de.dorschmic.baukunst.mini.MiniGrid;
 import de.dorschmic.baukunst.mini.MiniBlocks;
@@ -17,6 +19,9 @@ public final class MiniBlockModels {
 			MiniGridStateModel.Unbaked grid = new MiniGridStateModel.Unbaked();
 			context.registerBlockStateResolver(MiniGrid.BLOCK, resolver ->
 					MiniGrid.BLOCK.getStateDefinition().getPossibleStates().forEach(state -> resolver.setModel(state, grid)));
+			MixedSlabStateModel.Unbaked mixed = new MixedSlabStateModel.Unbaked();
+			context.registerBlockStateResolver(MixedSlabs.BLOCK, resolver ->
+					MixedSlabs.BLOCK.getStateDefinition().getPossibleStates().forEach(state -> resolver.setModel(state, mixed)));
 			ClusterStateModel.Unbaked cluster = new ClusterStateModel.Unbaked();
 			context.registerBlockStateResolver(Clusters.BLOCK, resolver ->
 					Clusters.BLOCK.getStateDefinition().getPossibleStates().forEach(state -> resolver.setModel(state, cluster)));

@@ -57,10 +57,21 @@ ein Stück pro Viertel (wie Laubstreu oder Rosa Blütenblätter).
 - Ausgenommen sind Blöcke, die breiter als ein Viertel sind (Setzlinge, Farne, Gras), wachsende Pflanzen, Zäune, Mauern,
   Glasscheiben, Redstone-Teile, Schienen, Leitern, Blumentöpfe, zweiteilige Pflanzen und Blöcke mit Inventar.
 
+### Gemischte Stufen
+![Gemischte Stufen](docs/mixed_slabs.png)
+
+Zwei **verschiedene** Stufen passen in ein Blockfeld – übereinander oder (mit vertikalen Stufen) nebeneinander,
+z. B. unten Eiche, oben Steinziegel. Geht mit allen Vanilla-Stufen und allen Stufen dieser Mod.
+
+- **Platzieren:** Mit einer anderen Stufe in der Hand auf die freie Hälfte einer einzelnen Stufe klicken – genau wie beim
+  Zusammensetzen von zwei gleichen Stufen. Zwei gleiche Stufen ergeben weiterhin den normalen Doppelblock.
+- **Abbauen** entfernt nur die Hälfte, auf die du schaust; die andere bleibt als normale Stufe stehen.
+  Abbaugeschwindigkeit, Werkzeug und Drop richten sich nach dieser Hälfte.
+
 ### WorldEdit
 Alle Blöcke der Mod funktionieren mit [WorldEdit](https://modrinth.com/plugin/worldedit) (getestet mit 7.4.6):
 `//copy`, `//paste`, `//set`, Undo – und auch **`//rotate`** und **`//flip`**. Vertikale Stufen, Treppen und Mini-Blöcke
-drehen sich mit, und Mini-Raster und Kleinkram-Felder drehen bzw. spiegeln auch ihren Inhalt. Das klappt genauso mit
+und gemischte Stufen drehen sich mit, und Mini-Raster und Kleinkram-Felder drehen bzw. spiegeln auch ihren Inhalt. Das klappt genauso mit
 Strukturblöcken. WorldEdit ist dafür keine Voraussetzung; in `runClient` wird es zum Testen automatisch mitgeladen.
 
 > Hinweis: Die Mod muss auf Client **und** Server installiert sein. Entfernt man sie, werden vertikale Stufen wieder zu normalen Stufen.
