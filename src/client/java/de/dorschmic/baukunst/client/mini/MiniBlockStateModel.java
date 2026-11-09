@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.renderer.v1.mesh.MutableQuadView;
 import net.fabricmc.fabric.api.client.renderer.v1.mesh.QuadEmitter;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockTintSource;
+import de.dorschmic.baukunst.client.SourceTint;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
@@ -87,14 +87,7 @@ public final class MiniBlockStateModel implements BlockStateModel {
 		Vector3f tmp = new Vector3f();
 		emitter.pushTransform(quad -> {
 			transformQuad(quad, tmp);
-			int tintIndex = quad.tintIndex();
-			if (tintIndex >= 0) {
-				BlockTintSource tint = Minecraft.getInstance().getBlockColors().getTintSource(sourceState, tintIndex);
-				if (tint != null) {
-					quad.multiplyColor(0xFF000000 | tint.colorInWorld(sourceState, level, pos));
-				}
-				quad.tintIndex(-1);
-			}
+			SourceTint.apply(quad, sourceState, level, pos);
 			return true;
 		});
 		// The mini block never touches neighbours fully, so nothing is culled.

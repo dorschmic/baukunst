@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:dried_kelp_block",
+  "result": {
+    "count": 1,
+    "id": "baukunst:dried_kelp_block_stairs"
+  }
+}

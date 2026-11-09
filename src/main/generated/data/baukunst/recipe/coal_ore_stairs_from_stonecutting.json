@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:coal_ore",
+  "result": {
+    "count": 1,
+    "id": "baukunst:coal_ore_stairs"
+  }
+}

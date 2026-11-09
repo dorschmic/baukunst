@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "baukunst:cherry_leaves_stairs"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "baukunst:blocks/cherry_leaves_stairs"
+}

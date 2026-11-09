@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:jungle_leaves",
+  "result": {
+    "count": 1,
+    "id": "baukunst:jungle_leaves_stairs"
+  }
+}

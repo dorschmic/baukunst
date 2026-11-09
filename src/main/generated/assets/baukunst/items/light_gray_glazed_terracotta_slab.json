@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/light_gray_glazed_terracotta",
+    "shape": "slab"
+  }
+}

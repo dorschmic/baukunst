@@ -4,5 +4,7 @@
 	"message.baukunst.vertical_slabs.on": "Vertikale Stufen: AN",
 	"message.baukunst.vertical_slabs.off": "Vertikale Stufen: AUS",
 	"block.baukunst.mini": "Mini-%s",
-	"itemGroup.baukunst.mini_blocks": "Mini-Blöcke"
+	"itemGroup.baukunst.mini_blocks": "Mini-Blöcke",
+	"block.baukunst.slab": "%s-Stufe",
+	"block.baukunst.stairs": "%s-Treppe"
 }

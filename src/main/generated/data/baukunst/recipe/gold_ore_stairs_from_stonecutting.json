@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:gold_ore",
+  "result": {
+    "count": 1,
+    "id": "baukunst:gold_ore_stairs"
+  }
+}

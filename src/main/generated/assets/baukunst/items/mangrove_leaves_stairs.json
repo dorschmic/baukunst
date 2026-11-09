@@ -1,0 +1,13 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/mangrove_leaves",
+    "shape": "stairs",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -7158200
+      }
+    ]
+  }
+}

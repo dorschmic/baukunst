@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/red_mushroom_block_inventory",
+    "shape": "slab"
+  }
+}

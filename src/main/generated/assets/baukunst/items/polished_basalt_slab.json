@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/polished_basalt",
+    "shape": "slab"
+  }
+}

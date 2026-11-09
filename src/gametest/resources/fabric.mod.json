@@ -7,7 +7,8 @@
 	"entrypoints": {
 		"fabric-client-gametest": [
 			"de.dorschmic.baukunst.test.VerticalSlabClientTest",
-			"de.dorschmic.baukunst.test.MiniBlockClientTest"
+			"de.dorschmic.baukunst.test.MiniBlockClientTest",
+			"de.dorschmic.baukunst.test.ShapedBlockClientTest"
 		]
 	},
 	"depends": {

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:yellow_poplar_leaves",
+  "result": {
+    "count": 1,
+    "id": "baukunst:yellow_poplar_leaves_stairs"
+  }
+}

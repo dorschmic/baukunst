@@ -30,12 +30,17 @@ import net.minecraft.world.level.material.PushReaction;
 /** Registers a {@link MiniBlock} for every vanilla full-cube block. */
 public final class MiniBlocks {
 	private static final List<MiniBlock> ALL = new ArrayList<>();
+	private static final java.util.Map<Block, MiniBlock> BY_SOURCE = new java.util.HashMap<>();
 
 	private MiniBlocks() {
 	}
 
 	public static List<MiniBlock> all() {
 		return Collections.unmodifiableList(ALL);
+	}
+
+	public static @org.jspecify.annotations.Nullable MiniBlock forSource(Block source) {
+		return BY_SOURCE.get(source);
 	}
 
 	public static Identifier idFor(Block source) {
@@ -60,10 +65,11 @@ public final class MiniBlocks {
 						.displayItems((params, output) -> ALL.forEach(output::accept))
 						.build());
 
+		MiniGrid.init();
 		Baukunst.LOGGER.info("{} Mini-Blöcke registriert", ALL.size());
 	}
 
-	static boolean isFullCube(Block block) {
+	public static boolean isFullCube(Block block) {
 		Identifier id = BuiltInRegistries.BLOCK.getKey(block);
 		if (!"minecraft".equals(id.getNamespace())) {
 			return false;
@@ -107,16 +113,11 @@ public final class MiniBlocks {
 		MiniBlock block = Registry.register(BuiltInRegistries.BLOCK, id, new MiniBlock(source, props));
 
 		Item.Properties itemProps = new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id));
-		BlockItem item = new BlockItem(block, itemProps) {
-			@Override
-			public Component getName(ItemStack stack) {
-				// "Mini-<Blockname>" in the player's language, no per-block translations needed.
-				return block.getName();
-			}
-		};
+		BlockItem item = new MiniBlockItem(block, itemProps);
 		item.registerBlocks(Item.BY_BLOCK, item);
 		Registry.register(BuiltInRegistries.ITEM, id, item);
 
 		ALL.add(block);
+		BY_SOURCE.put(source, block);
 	}
 }

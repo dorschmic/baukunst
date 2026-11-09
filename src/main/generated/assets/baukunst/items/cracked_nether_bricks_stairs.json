@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/cracked_nether_bricks",
+    "shape": "stairs"
+  }
+}

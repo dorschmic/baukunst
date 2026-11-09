@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/warped_nylium",
+    "shape": "stairs"
+  }
+}

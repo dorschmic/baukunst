@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:poplar_wood",
+  "result": {
+    "count": 1,
+    "id": "baukunst:poplar_wood_stairs"
+  }
+}

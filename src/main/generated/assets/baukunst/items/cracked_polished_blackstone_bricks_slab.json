@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/cracked_polished_blackstone_bricks",
+    "shape": "slab"
+  }
+}

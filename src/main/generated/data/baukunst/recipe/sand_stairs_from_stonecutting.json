@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:sand",
+  "result": {
+    "count": 1,
+    "id": "baukunst:sand_stairs"
+  }
+}

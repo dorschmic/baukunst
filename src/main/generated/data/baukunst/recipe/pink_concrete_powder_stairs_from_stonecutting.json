@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:pink_concrete_powder",
+  "result": {
+    "count": 1,
+    "id": "baukunst:pink_concrete_powder_stairs"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:redstone_ore",
+  "result": {
+    "count": 1,
+    "id": "baukunst:redstone_ore_stairs"
+  }
+}

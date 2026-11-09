@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:emerald_block",
+  "result": {
+    "count": 2,
+    "id": "baukunst:emerald_block_slab"
+  }
+}

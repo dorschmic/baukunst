@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "baukunst:brain_coral_block_stairs"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "baukunst:blocks/brain_coral_block_stairs"
+}

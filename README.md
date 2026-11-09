@@ -26,6 +26,21 @@ gibt es zusätzlich als **Mini-Block** in Spielerkopf-Größe.
 - **Platzieren wie ein Spielerkopf:** Auf dem Boden in 16 Drehrichtungen (die Vorderseite schaut zu dir) oder seitlich an eine Wand geklickt hängend.
 - Die Mini-Blöcke nutzen automatisch das Original-Modell und die Texturen des Blocks (inkl. Gras-/Laubfarbe je nach Biom, Glas durchsichtig, Leuchtblöcke leuchten).
 - Abbauen geht mit der Hand, sie droppen sich selbst.
+- **Raster-Modus (Shift):** Mit gedrückter Shift-Taste rasten Mini-Blöcke im **2×2×2-Raster** ein – bis zu 8 Stück pro Block,
+  auch aus verschiedenen Materialien. So lassen sich kleine Treppen, Muster, Möbel oder Statuen „voxeln“.
+  Abbauen entfernt nur den Mini-Block, auf den du schaust.
+
+### Stufen & Treppen für jeden Baublock
+![Stufen und Treppen](docs/slabs_and_stairs.png)
+
+Für alle Baublöcke, die in Vanilla keine Stufe/Treppe haben, gibt es jetzt beides (539 neue Blöcke) – z. B. Erde, Gras,
+Stämme, Laub, Glas, Terrakotta, Erze, Eis, Kupfer …
+
+- Im Kreativ-Inventar stehen sie **direkt hinter ihrem Block** in den normalen Tabs.
+- **Steinsäge:** 1 Block → 2 Stufen bzw. 1 Treppe.
+- Die neuen Stufen lassen sich mit `V` ebenfalls **vertikal** platzieren.
+- Abbau-Werkzeug wie beim Original (z. B. Spitzhacke für Stein-Treppen, Schaufel für Erd-Stufen), doppelte Stufen droppen 2.
+- Ausgenommen sind Funktionsblöcke wie Werkbank, TNT, Kolben oder Bücherregal.
 
 > Hinweis: Die Mod muss auf Client **und** Server installiert sein. Entfernt man sie, werden vertikale Stufen wieder zu normalen Stufen.
 
@@ -49,7 +64,7 @@ Die Blockstate-Dateien für die Stufen werden aus den Vanilla-Daten erzeugt:
 python3 scripts/generate_slab_blockstates.py
 ```
 
-Item-Modelle und Steinsägen-Rezepte der Mini-Blöcke erzeugt der Datengenerator (`src/main/generated`):
+Item-Modelle, Rezepte, Drops und Werkzeug-Tags der Mini-Blöcke, Stufen und Treppen erzeugt der Datengenerator (`src/main/generated`):
 
 ```bash
 ./gradlew runDatagen

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:horn_coral_block",
+  "result": {
+    "count": 1,
+    "id": "baukunst:horn_coral_block_stairs"
+  }
+}

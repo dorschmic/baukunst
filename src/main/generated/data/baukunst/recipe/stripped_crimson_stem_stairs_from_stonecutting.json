@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:stripped_crimson_stem",
+  "result": {
+    "count": 1,
+    "id": "baukunst:stripped_crimson_stem_stairs"
+  }
+}

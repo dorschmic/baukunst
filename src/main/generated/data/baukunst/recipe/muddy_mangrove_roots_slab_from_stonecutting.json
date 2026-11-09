@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:muddy_mangrove_roots",
+  "result": {
+    "count": 2,
+    "id": "baukunst:muddy_mangrove_roots_slab"
+  }
+}

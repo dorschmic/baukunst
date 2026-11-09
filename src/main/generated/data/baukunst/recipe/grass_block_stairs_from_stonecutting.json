@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:grass_block",
+  "result": {
+    "count": 1,
+    "id": "baukunst:grass_block_stairs"
+  }
+}

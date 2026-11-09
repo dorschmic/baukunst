@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/yellow_stained_glass",
+    "shape": "stairs"
+  }
+}

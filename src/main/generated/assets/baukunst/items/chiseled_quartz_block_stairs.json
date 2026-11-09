@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/chiseled_quartz_block",
+    "shape": "stairs"
+  }
+}

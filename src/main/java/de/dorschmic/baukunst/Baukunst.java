@@ -1,6 +1,8 @@
 package de.dorschmic.baukunst;
 
 import de.dorschmic.baukunst.mini.MiniBlocks;
+import de.dorschmic.baukunst.shapes.ShapedBlockTabs;
+import de.dorschmic.baukunst.shapes.ShapedBlocks;
 import de.dorschmic.baukunst.slab.VerticalModePayload;
 import de.dorschmic.baukunst.slab.VerticalSlabMode;
 import net.fabricmc.api.ModInitializer;
@@ -30,6 +32,8 @@ public class Baukunst implements ModInitializer {
 				(handler, server) -> VerticalSlabMode.set(handler.getPlayer().getUUID(), false));
 
 		MiniBlocks.init();
+		ShapedBlocks.init();
+		ShapedBlockTabs.init();
 
 		LOGGER.info("Baukunst geladen – viel Spaß beim schön Bauen!");
 	}

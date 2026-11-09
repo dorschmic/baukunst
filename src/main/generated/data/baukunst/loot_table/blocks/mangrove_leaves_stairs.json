@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "baukunst:mangrove_leaves_stairs"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "baukunst:blocks/mangrove_leaves_stairs"
+}

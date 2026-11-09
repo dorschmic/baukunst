@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/stripped_acacia_log",
+    "shape": "stairs"
+  }
+}

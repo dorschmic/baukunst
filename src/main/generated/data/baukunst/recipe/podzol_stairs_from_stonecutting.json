@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:podzol",
+  "result": {
+    "count": 1,
+    "id": "baukunst:podzol_stairs"
+  }
+}

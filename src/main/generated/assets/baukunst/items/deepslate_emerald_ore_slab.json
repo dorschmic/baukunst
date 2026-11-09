@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/deepslate_emerald_ore",
+    "shape": "slab"
+  }
+}

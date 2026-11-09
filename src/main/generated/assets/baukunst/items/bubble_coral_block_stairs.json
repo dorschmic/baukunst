@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/bubble_coral_block",
+    "shape": "stairs"
+  }
+}

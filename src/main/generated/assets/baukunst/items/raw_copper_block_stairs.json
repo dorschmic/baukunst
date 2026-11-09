@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/raw_copper_block",
+    "shape": "stairs"
+  }
+}

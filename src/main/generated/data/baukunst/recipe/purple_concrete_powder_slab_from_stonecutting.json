@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:purple_concrete_powder",
+  "result": {
+    "count": 2,
+    "id": "baukunst:purple_concrete_powder_slab"
+  }
+}

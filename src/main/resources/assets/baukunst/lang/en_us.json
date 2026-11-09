@@ -4,5 +4,7 @@
 	"message.baukunst.vertical_slabs.on": "Vertical slabs: ON",
 	"message.baukunst.vertical_slabs.off": "Vertical slabs: OFF",
 	"block.baukunst.mini": "Mini %s",
-	"itemGroup.baukunst.mini_blocks": "Mini Blocks"
+	"itemGroup.baukunst.mini_blocks": "Mini Blocks",
+	"block.baukunst.slab": "%s Slab",
+	"block.baukunst.stairs": "%s Stairs"
 }

@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/dead_fire_coral_block",
+    "shape": "slab"
+  }
+}

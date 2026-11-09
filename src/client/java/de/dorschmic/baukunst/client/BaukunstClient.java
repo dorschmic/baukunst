@@ -3,6 +3,7 @@ package de.dorschmic.baukunst.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import de.dorschmic.baukunst.Baukunst;
 import de.dorschmic.baukunst.client.mini.MiniBlockModels;
+import de.dorschmic.baukunst.client.shapes.ShapedBlockModels;
 import de.dorschmic.baukunst.slab.VerticalModePayload;
 import de.dorschmic.baukunst.slab.VerticalSlabMode;
 import net.fabricmc.api.ClientModInitializer;
@@ -23,6 +24,7 @@ public class BaukunstClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		MiniBlockModels.init();
+		ShapedBlockModels.init();
 
 		toggleVerticalKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
 				"key.baukunst.toggle_vertical_slabs", InputConstants.KEY_V, CATEGORY));

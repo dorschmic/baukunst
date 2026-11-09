@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:mycelium",
+  "result": {
+    "count": 1,
+    "id": "baukunst:mycelium_stairs"
+  }
+}

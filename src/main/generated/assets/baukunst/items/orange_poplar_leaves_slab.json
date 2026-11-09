@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/orange_poplar_leaves",
+    "shape": "slab"
+  }
+}

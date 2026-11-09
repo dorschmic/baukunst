@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:fire_coral_block",
+  "result": {
+    "count": 2,
+    "id": "baukunst:fire_coral_block_slab"
+  }
+}

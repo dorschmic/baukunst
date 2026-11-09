@@ -8,5 +8,6 @@ public class BaukunstDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator generator) {
 		FabricDataGenerator.Pack pack = generator.createPack();
 		pack.addProvider(MiniBlockDataProvider::new);
+		pack.addProvider(ShapedBlockDataProvider::new);
 	}
 }

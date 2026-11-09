@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:lime_glazed_terracotta",
+  "result": {
+    "count": 1,
+    "id": "baukunst:lime_glazed_terracotta_stairs"
+  }
+}

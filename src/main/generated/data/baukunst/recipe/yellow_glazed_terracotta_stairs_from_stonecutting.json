@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:yellow_glazed_terracotta",
+  "result": {
+    "count": 1,
+    "id": "baukunst:yellow_glazed_terracotta_stairs"
+  }
+}

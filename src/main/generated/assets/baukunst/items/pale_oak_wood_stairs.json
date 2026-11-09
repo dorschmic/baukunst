@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/pale_oak_wood",
+    "shape": "stairs"
+  }
+}

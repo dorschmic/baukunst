@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:mangrove_roots",
+  "result": {
+    "count": 1,
+    "id": "baukunst:mangrove_roots_stairs"
+  }
+}

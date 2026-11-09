@@ -1,0 +1,28 @@
+{
+  "values": [
+    "baukunst:deepslate_diamond_ore_slab",
+    "baukunst:deepslate_diamond_ore_stairs",
+    "baukunst:deepslate_emerald_ore_slab",
+    "baukunst:deepslate_emerald_ore_stairs",
+    "baukunst:deepslate_gold_ore_slab",
+    "baukunst:deepslate_gold_ore_stairs",
+    "baukunst:deepslate_redstone_ore_slab",
+    "baukunst:deepslate_redstone_ore_stairs",
+    "baukunst:diamond_block_slab",
+    "baukunst:diamond_block_stairs",
+    "baukunst:diamond_ore_slab",
+    "baukunst:diamond_ore_stairs",
+    "baukunst:emerald_block_slab",
+    "baukunst:emerald_block_stairs",
+    "baukunst:emerald_ore_slab",
+    "baukunst:emerald_ore_stairs",
+    "baukunst:gold_block_slab",
+    "baukunst:gold_block_stairs",
+    "baukunst:gold_ore_slab",
+    "baukunst:gold_ore_stairs",
+    "baukunst:raw_gold_block_slab",
+    "baukunst:raw_gold_block_stairs",
+    "baukunst:redstone_ore_slab",
+    "baukunst:redstone_ore_stairs"
+  ]
+}

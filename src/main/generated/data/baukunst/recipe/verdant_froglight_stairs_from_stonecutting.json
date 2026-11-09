@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:verdant_froglight",
+  "result": {
+    "count": 1,
+    "id": "baukunst:verdant_froglight_stairs"
+  }
+}

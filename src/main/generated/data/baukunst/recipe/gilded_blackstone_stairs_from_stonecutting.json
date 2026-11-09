@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:gilded_blackstone",
+  "result": {
+    "count": 1,
+    "id": "baukunst:gilded_blackstone_stairs"
+  }
+}

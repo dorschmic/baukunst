@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:brown_mushroom_block",
+  "result": {
+    "count": 1,
+    "id": "baukunst:brown_mushroom_block_stairs"
+  }
+}

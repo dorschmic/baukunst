@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "baukunst:shaped_block",
+    "model": "minecraft:block/cherry_log",
+    "shape": "stairs"
+  }
+}

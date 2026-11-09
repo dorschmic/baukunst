@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:dead_bubble_coral_block",
+  "result": {
+    "count": 1,
+    "id": "baukunst:dead_bubble_coral_block_stairs"
+  }
+}

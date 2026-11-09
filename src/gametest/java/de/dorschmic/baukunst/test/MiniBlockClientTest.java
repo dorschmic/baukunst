@@ -2,6 +2,8 @@ package de.dorschmic.baukunst.test;
 
 import de.dorschmic.baukunst.mini.MiniBlock;
 import de.dorschmic.baukunst.mini.MiniBlocks;
+import de.dorschmic.baukunst.mini.MiniGrid;
+import de.dorschmic.baukunst.mini.MiniGridBlockEntity;
 import java.util.List;
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
@@ -58,6 +60,35 @@ public class MiniBlockClientTest implements FabricClientGameTest {
 						MiniBlocks.idFor(Blocks.STONE).withSuffix("_from_stonecutting"))).isPresent(), "stonecutter recipe exists");
 			});
 
+			// Sneak placement: mini blocks snap into a 2x2x2 grid, mixed materials in one block space.
+			world.getServer().runOnServer(server -> {
+				ServerLevel level = server.overworld();
+				ServerPlayer player = server.getPlayerList().getPlayers().getFirst();
+				BlockPos base = player.blockPosition().offset(6, 0, 0);
+				level.setBlockAndUpdate(base, Blocks.STONE.defaultBlockState());
+				player.setShiftKeyDown(true);
+				useOn(player, mini(Blocks.OAK_PLANKS), base, Direction.UP, new Vec3(base.getX() + 0.25, base.getY() + 1, base.getZ() + 0.25));
+				useOn(player, mini(Blocks.GLASS), base, Direction.UP, new Vec3(base.getX() + 0.75, base.getY() + 1, base.getZ() + 0.25));
+				BlockPos gridPos = base.above();
+				// Click on top of the first mini block -> goes into the cell above it.
+				useOn(player, mini(Blocks.GOLD_BLOCK), gridPos, Direction.UP, new Vec3(gridPos.getX() + 0.25, gridPos.getY() + 0.5, gridPos.getZ() + 0.25));
+				player.setShiftKeyDown(false);
+
+				check(level.getBlockState(gridPos).is(MiniGrid.BLOCK), "grid block placed");
+				MiniGridBlockEntity grid = (MiniGridBlockEntity) level.getBlockEntity(gridPos);
+				check(grid.mask() == 0b111, "three cells filled (x0y0z0, x1y0z0, x0y1z0), mask=" + Integer.toBinaryString(grid.mask()));
+				check(grid.get(0) == Blocks.OAK_PLANKS && grid.get(1) == Blocks.GLASS && grid.get(2) == Blocks.GOLD_BLOCK, "right materials");
+				check(level.getBlockState(gridPos).getShape(level, gridPos).bounds().maxY == 1.0, "shape follows contents");
+
+				List<ItemStack> drops = Block.getDrops(level.getBlockState(gridPos), level, gridPos, grid);
+				check(drops.size() == 3, "drops all three, got " + drops);
+
+				// Breaking removes only one mini block while others remain.
+				boolean vanillaBreak = net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.BEFORE.invoker()
+						.beforeBlockBreak(level, player, gridPos, level.getBlockState(gridPos), grid);
+				check(!vanillaBreak && Integer.bitCount(grid.mask()) == 2, "one mini block removed, mask=" + Integer.toBinaryString(grid.mask()));
+			});
+
 			// Showcase: a row of mini blocks on the floor, a few on a wall.
 			world.getServer().runOnServer(server -> {
 				ServerLevel level = server.overworld();
@@ -81,7 +112,24 @@ public class MiniBlockClientTest implements FabricClientGameTest {
 							.setValue(MiniBlock.WALL, true).setValue(MiniBlock.ROTATION, 0));
 				}
 				level.setBlockAndUpdate(origin.offset(0, 1, 0), mini(Blocks.CARVED_PUMPKIN).defaultBlockState().setValue(MiniBlock.ROTATION, 0));
-				player.teleportTo(origin.getX() + 0.5, origin.getY() + 0.6, origin.getZ() + 4.5);
+				// A 2x2x2 checkerboard and a tiny staircase built from the grid.
+				BlockPos gridA = origin.offset(1, 0, 2);
+				BlockPos gridB = origin.offset(-2, 0, 2);
+				level.setBlockAndUpdate(gridA, MiniGrid.BLOCK.defaultBlockState());
+				level.setBlockAndUpdate(gridB, MiniGrid.BLOCK.defaultBlockState());
+				MiniGridBlockEntity a = (MiniGridBlockEntity) level.getBlockEntity(gridA);
+				MiniGridBlockEntity b = (MiniGridBlockEntity) level.getBlockEntity(gridB);
+				for (int slot = 0; slot < 8; slot++) {
+					int parity = (slot & 1) ^ ((slot >> 1) & 1) ^ ((slot >> 2) & 1);
+					a.set(slot, parity == 0 ? Blocks.QUARTZ_BLOCK : Blocks.BLACKSTONE);
+				}
+				b.set(MiniGridBlockEntity.slotIndex(0, 0, 0), Blocks.OAK_PLANKS);
+				b.set(MiniGridBlockEntity.slotIndex(1, 0, 0), Blocks.OAK_PLANKS);
+				b.set(MiniGridBlockEntity.slotIndex(0, 0, 1), Blocks.OAK_PLANKS);
+				b.set(MiniGridBlockEntity.slotIndex(1, 0, 1), Blocks.OAK_PLANKS);
+				b.set(MiniGridBlockEntity.slotIndex(0, 1, 0), Blocks.OAK_PLANKS);
+				b.set(MiniGridBlockEntity.slotIndex(1, 1, 0), Blocks.MOSS_BLOCK);
+				player.teleportTo(origin.getX() + 0.5, origin.getY() + 0.6, origin.getZ() + 5.5);
 				for (int i = 0; i < 9; i++) {
 					player.getInventory().setItem(i, new ItemStack(mini(sources.get(i))));
 				}
@@ -89,7 +137,7 @@ public class MiniBlockClientTest implements FabricClientGameTest {
 			context.waitTicks(10);
 			world.getConnection().waitForChunksRender();
 			BlockPos target = world.getServer().<BlockPos, RuntimeException>computeOnServer(server ->
-					server.getPlayerList().getPlayers().getFirst().blockPosition().offset(0, 0, -4));
+					server.getPlayerList().getPlayers().getFirst().blockPosition().offset(0, 0, -5));
 			context.getInput().lookAt(target);
 			context.waitTicks(10);
 			context.takeScreenshot("mini_blocks");
@@ -98,6 +146,12 @@ public class MiniBlockClientTest implements FabricClientGameTest {
 
 	private static Block mini(Block source) {
 		return BuiltInRegistries.BLOCK.getValue(MiniBlocks.idFor(source));
+	}
+
+	private static void useOn(ServerPlayer player, Block mini, BlockPos clicked, Direction face, Vec3 hit) {
+		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(mini));
+		new ItemStack(mini).getItem().useOn(new net.minecraft.world.item.context.UseOnContext(player, InteractionHand.MAIN_HAND,
+				new BlockHitResult(hit, face, clicked, false)));
 	}
 
 	private static void place(ServerLevel level, ServerPlayer player, Block block, BlockPos clicked, Direction face, Vec3 hit) {

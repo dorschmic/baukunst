@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:stripped_bamboo_block",
+  "result": {
+    "count": 1,
+    "id": "baukunst:stripped_bamboo_block_stairs"
+  }
+}
