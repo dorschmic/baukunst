@@ -1,5 +1,6 @@
 package de.dorschmic.baukunst;
 
+import de.dorschmic.baukunst.cluster.Clusters;
 import de.dorschmic.baukunst.mini.MiniBlocks;
 import de.dorschmic.baukunst.shapes.ShapedBlockTabs;
 import de.dorschmic.baukunst.shapes.ShapedBlocks;
@@ -34,6 +35,7 @@ public class Baukunst implements ModInitializer {
 		MiniBlocks.init();
 		ShapedBlocks.init();
 		ShapedBlockTabs.init();
+		Clusters.init();
 
 		LOGGER.info("Baukunst geladen – viel Spaß beim schön Bauen!");
 	}
