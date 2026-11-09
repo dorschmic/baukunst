@@ -68,10 +68,22 @@ z. B. unten Eiche, oben Steinziegel. Geht mit allen Vanilla-Stufen und allen Stu
 - **Abbauen** entfernt nur die Hälfte, auf die du schaust; die andere bleibt als normale Stufe stehen.
   Abbaugeschwindigkeit, Werkzeug und Drop richten sich nach dieser Hälfte.
 
+### Doppel-Falltüren (für Fachwerk)
+![Doppel-Falltüren](docs/double_trapdoors.png)
+
+Zwei Falltüren in einem Blockfeld, immer auf **gegenüberliegenden Seiten** – oben + unten oder vorne + hinten.
+Perfekt für Fachwerkwände, die von innen und außen nach Balken aussehen. Auch verschiedene Holzarten gehen (z. B. außen Fichte, innen Birke).
+
+- **Platzieren:** Mit einer Falltür in der Hand auf die große Innenfläche einer einzelnen Falltür klicken – die neue kommt auf die
+  gegenüberliegende Seite desselben Blocks. Geht auch, indem man den Nachbarblock anklickt, wenn die freie Seite zu einem zeigt.
+- Doppel-Falltüren lassen sich **nicht öffnen** (kein Platz).
+- **Abbauen** entfernt nur die Falltür, auf die du schaust; die andere bleibt als normale Falltür stehen.
+- Tipp: Willst du eine Falltür öffnen/schließen, halte dabei keine Falltür in der Hand.
+
 ### WorldEdit
 Alle Blöcke der Mod funktionieren mit [WorldEdit](https://modrinth.com/plugin/worldedit) (getestet mit 7.4.6):
 `//copy`, `//paste`, `//set`, Undo – und auch **`//rotate`** und **`//flip`**. Vertikale Stufen, Treppen und Mini-Blöcke
-und gemischte Stufen drehen sich mit, und Mini-Raster und Kleinkram-Felder drehen bzw. spiegeln auch ihren Inhalt. Das klappt genauso mit
+gemischte Stufen und Doppel-Falltüren drehen sich mit, und Mini-Raster und Kleinkram-Felder drehen bzw. spiegeln auch ihren Inhalt. Das klappt genauso mit
 Strukturblöcken. WorldEdit ist dafür keine Voraussetzung; in `runClient` wird es zum Testen automatisch mitgeladen.
 
 > Hinweis: Die Mod muss auf Client **und** Server installiert sein. Entfernt man sie, werden vertikale Stufen wieder zu normalen Stufen.

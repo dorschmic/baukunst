@@ -267,7 +267,8 @@ public final class Clusters {
 	private static int targetedSlot(Player player, BlockPos pos, ClusterBlockEntity cluster) {
 		HitResult hit = player.pick(player.blockInteractionRange(), 1.0F, false);
 		if (hit instanceof BlockHitResult blockHit && blockHit.getBlockPos().equals(pos)) {
-			int slot = quarterAt(blockHit.getLocation(), pos);
+			// A little further along the view ray, so a hit on an edge counts for the part behind it.
+			int slot = quarterAt(blockHit.getLocation().add(player.getLookAngle().scale(0.01)), pos);
 			if (cluster.get(slot) != null) {
 				return slot;
 			}

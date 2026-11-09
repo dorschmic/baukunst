@@ -9,5 +9,6 @@
 	"block.baukunst.stairs": "%s Stairs",
 	"block.baukunst.mixed_slab": "Mixed Slabs",
 	"block.baukunst.cluster": "Small Blocks",
-	"block.baukunst.mini_grid": "Mini Block Grid"
+	"block.baukunst.mini_grid": "Mini Block Grid",
+	"block.baukunst.double_trapdoor": "Double Trapdoor"
 }

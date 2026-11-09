@@ -67,7 +67,16 @@ public class WorldEditClientTest implements FabricClientGameTest {
 			});
 
 			BlockPos copyFrom = origin;
-			BlockPos copyTo = origin.offset(2, 0, 1);
+			BlockPos copyTo = origin.offset(2, 1, 1);
+			world.getServer().runOnServer(server -> {
+				// Double trapdoor (0,1,0): spruce on the north wall side, oak on the south side.
+				ServerLevel level = server.overworld();
+				BlockPos t = origin.above();
+				level.setBlockAndUpdate(t, de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.BLOCK.defaultBlockState());
+				((de.dorschmic.baukunst.trapdoor.DoubleTrapdoorBlockEntity) level.getBlockEntity(t)).set(
+						de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.panelState(Blocks.SPRUCE_TRAPDOOR.defaultBlockState(), Direction.NORTH),
+						de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.panelState(Blocks.OAK_TRAPDOOR.defaultBlockState(), Direction.SOUTH));
+			});
 			BlockPos plain = origin.offset(0, 0, 10);
 			BlockPos rotated = origin.offset(0, 0, 20);
 			BlockPos flipped = origin.offset(0, 0, 30);
@@ -130,6 +139,13 @@ public class WorldEditClientTest implements FabricClientGameTest {
 						&& m.first() == Blocks.OAK_SLAB && m.second() == Blocks.STONE_SLAB, "paste keeps mixed slab");
 				check(level.getBlockState(rotated.offset(-1, 0, 2)).getValue(mixedFacing) == Direction.SOUTH, "mixed slab rotates");
 				check(level.getBlockState(flipped.offset(-2, 0, 1)).getValue(mixedFacing) == Direction.WEST, "mixed slab mirrors");
+
+				// Double trapdoor (0,1,0): rotated 90° the spruce one is on the east side, the oak one west.
+				var rt = (de.dorschmic.baukunst.trapdoor.DoubleTrapdoorBlockEntity) level.getBlockEntity(rotated.above());
+				check(rt.get(0).is(Blocks.SPRUCE_TRAPDOOR) && de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.sideOf(rt.get(0)) == Direction.EAST
+						&& de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.sideOf(rt.get(1)) == Direction.WEST, "double trapdoor rotates");
+				var pt = (de.dorschmic.baukunst.trapdoor.DoubleTrapdoorBlockEntity) level.getBlockEntity(plain.above());
+				check(de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.sideOf(pt.get(0)) == Direction.NORTH, "paste keeps double trapdoor");
 			});
 		}
 	}

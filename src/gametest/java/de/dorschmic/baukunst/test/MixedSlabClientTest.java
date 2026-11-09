@@ -128,6 +128,41 @@ public class MixedSlabClientTest implements FabricClientGameTest {
 			context.getInput().lookAt(target);
 			context.waitTicks(10);
 			context.takeScreenshot("mixed_slabs");
+
+			// Half-timbered wall made of double trapdoors: spruce outside, birch inside, plaster panels in between.
+			world.getServer().runOnServer(server -> {
+				ServerLevel level = server.overworld();
+				ServerPlayer player = server.getPlayerList().getPlayers().getFirst();
+				BlockPos origin = player.blockPosition().offset(40, 0, 40);
+				clear(level, origin.offset(-6, -1, -3), origin.offset(6, 6, 8));
+				for (int x = -6; x <= 6; x++) {
+					for (int z = -3; z <= 8; z++) {
+						level.setBlockAndUpdate(origin.offset(x, -1, z), Blocks.GRASS_BLOCK.defaultBlockState());
+					}
+				}
+				for (int x = -4; x <= 4; x++) {
+					for (int y = 0; y <= 4; y++) {
+						boolean frame = x == -4 || x == 4 || x == 0 || y == 0 || y == 4 || y == 2;
+						BlockPos at = origin.offset(x, y, 0);
+						if (frame) {
+							level.setBlockAndUpdate(at, de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.BLOCK.defaultBlockState());
+							((de.dorschmic.baukunst.trapdoor.DoubleTrapdoorBlockEntity) level.getBlockEntity(at)).set(
+									de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.panelState(Blocks.SPRUCE_TRAPDOOR.defaultBlockState(), Direction.SOUTH),
+									de.dorschmic.baukunst.trapdoor.DoubleTrapdoors.panelState(Blocks.BIRCH_TRAPDOOR.defaultBlockState(), Direction.NORTH));
+						} else {
+							level.setBlockAndUpdate(at, Blocks.CALCITE.defaultBlockState());
+						}
+					}
+				}
+				player.teleportTo(origin.getX() + 0.5, origin.getY(), origin.getZ() + 7.5);
+			});
+			context.waitTicks(20);
+			world.getConnection().waitForChunksRender();
+			BlockPos wallTarget = world.getServer().<BlockPos, RuntimeException>computeOnServer(server ->
+					server.getPlayerList().getPlayers().getFirst().blockPosition().offset(0, 2, -7));
+			context.getInput().lookAt(wallTarget);
+			context.waitTicks(10);
+			context.takeScreenshot("double_trapdoors");
 		}
 	}
 

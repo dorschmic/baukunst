@@ -2,7 +2,9 @@ package de.dorschmic.baukunst.client.mini;
 
 import de.dorschmic.baukunst.client.cluster.ClusterStateModel;
 import de.dorschmic.baukunst.client.mixed.MixedSlabStateModel;
+import de.dorschmic.baukunst.client.trapdoor.DoubleTrapdoorStateModel;
 import de.dorschmic.baukunst.cluster.Clusters;
+import de.dorschmic.baukunst.trapdoor.DoubleTrapdoors;
 import de.dorschmic.baukunst.mixed.MixedSlabs;
 import de.dorschmic.baukunst.mini.MiniBlock;
 import de.dorschmic.baukunst.mini.MiniGrid;
@@ -22,6 +24,9 @@ public final class MiniBlockModels {
 			MixedSlabStateModel.Unbaked mixed = new MixedSlabStateModel.Unbaked();
 			context.registerBlockStateResolver(MixedSlabs.BLOCK, resolver ->
 					MixedSlabs.BLOCK.getStateDefinition().getPossibleStates().forEach(state -> resolver.setModel(state, mixed)));
+			DoubleTrapdoorStateModel.Unbaked trapdoors = new DoubleTrapdoorStateModel.Unbaked();
+			context.registerBlockStateResolver(DoubleTrapdoors.BLOCK, resolver ->
+					DoubleTrapdoors.BLOCK.getStateDefinition().getPossibleStates().forEach(state -> resolver.setModel(state, trapdoors)));
 			ClusterStateModel.Unbaked cluster = new ClusterStateModel.Unbaked();
 			context.registerBlockStateResolver(Clusters.BLOCK, resolver ->
 					Clusters.BLOCK.getStateDefinition().getPossibleStates().forEach(state -> resolver.setModel(state, cluster)));

@@ -9,5 +9,6 @@
 	"block.baukunst.stairs": "%s-Treppe",
 	"block.baukunst.mixed_slab": "Gemischte Stufen",
 	"block.baukunst.cluster": "Kleinkram",
-	"block.baukunst.mini_grid": "Mini-Raster"
+	"block.baukunst.mini_grid": "Mini-Raster",
+	"block.baukunst.double_trapdoor": "Doppel-Falltür"
 }

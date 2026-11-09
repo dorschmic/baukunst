@@ -117,8 +117,9 @@ public final class MiniGrid {
 	private static int targetedSlot(Player player, BlockPos pos, MiniGridBlockEntity grid) {
 		HitResult hit = player.pick(player.blockInteractionRange(), 1.0F, false);
 		if (hit instanceof BlockHitResult blockHit && blockHit.getBlockPos().equals(pos)) {
-			Direction face = blockHit.getDirection();
-			Vec3 inside = blockHit.getLocation().subtract(face.getStepX() * 0.25, face.getStepY() * 0.25, face.getStepZ() * 0.25);
+			// Step a little further along the view ray: that is inside the cell that was hit, even when the
+			// ray hits exactly on an edge between two cells.
+			Vec3 inside = blockHit.getLocation().add(player.getLookAngle().scale(0.01));
 			int slot = slotAt(inside, pos);
 			if (grid.get(slot) != null) {
 				return slot;
