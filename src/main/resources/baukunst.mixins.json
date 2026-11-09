@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "de.dorschmic.baukunst.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"SlabBlockMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

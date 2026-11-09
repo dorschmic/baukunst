@@ -1,0 +1,71 @@
+{
+  "variants": {
+    "type=bottom,vertical=none": {
+      "model": "minecraft:block/light_gray_concrete_slab"
+    },
+    "type=top,vertical=none": {
+      "model": "minecraft:block/light_gray_concrete_slab_top"
+    },
+    "type=double,vertical=none": {
+      "model": "minecraft:block/light_gray_concrete"
+    },
+    "type=bottom,vertical=north": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90,
+      "y": 180
+    },
+    "type=top,vertical=north": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90,
+      "y": 180
+    },
+    "type=double,vertical=north": {
+      "model": "minecraft:block/light_gray_concrete"
+    },
+    "type=bottom,vertical=east": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90,
+      "y": 270
+    },
+    "type=top,vertical=east": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90,
+      "y": 270
+    },
+    "type=double,vertical=east": {
+      "model": "minecraft:block/light_gray_concrete"
+    },
+    "type=bottom,vertical=south": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90
+    },
+    "type=top,vertical=south": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90
+    },
+    "type=double,vertical=south": {
+      "model": "minecraft:block/light_gray_concrete"
+    },
+    "type=bottom,vertical=west": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90,
+      "y": 90
+    },
+    "type=top,vertical=west": {
+      "model": "minecraft:block/light_gray_concrete_slab",
+      "uvlock": true,
+      "x": 90,
+      "y": 90
+    },
+    "type=double,vertical=west": {
+      "model": "minecraft:block/light_gray_concrete"
+    }
+  }
+}
