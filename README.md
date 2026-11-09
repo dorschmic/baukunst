@@ -42,6 +42,20 @@ Stämme, Laub, Glas, Terrakotta, Erze, Eis, Kupfer …
 - Abbau-Werkzeug wie beim Original (z. B. Spitzhacke für Stein-Treppen, Schaufel für Erd-Stufen), doppelte Stufen droppen 2.
 - Ausgenommen sind Funktionsblöcke wie Werkbank, TNT, Kolben oder Bücherregal.
 
+### Kleinkram: bis zu 4 kleine Blöcke in einem Feld
+![Kleinkram](docs/small_block_clusters.png)
+
+Kleine Vanilla-Blöcke – Blumen, Setzlinge, Pilze, Farne, Laternen, Fackeln, Ketten, Kerzen … – passen zu viert in ein Blockfeld,
+ein Stück pro Viertel (wie Laubstreu oder Rosa Blütenblätter).
+
+- **Ein** kleiner Block steht ganz normal in der Mitte.
+- Klickst du mit einem **zweiten** kleinen Block darauf, rücken beide in Viertel: der neue in das Viertel, auf das du zielst,
+  der alte diagonal gegenüber. Der 3. und 4. kommen in die freien Viertel.
+- Die Blöcke behalten ihre **Originalgröße** und ihr Aussehen; eine Laterne im Feld leuchtet weiter.
+- **Abbauen** entfernt nur den Block, auf den du schaust. Bleibt einer übrig, wandert er zurück in die Mitte und ist wieder ein normaler Block.
+- Kerzen, Seegurken, Blütenblätter und Schildkröteneier stapeln sich wie gewohnt, wenn du denselben Block daraufklickst.
+- Ausgenommen sind Redstone-Teile, Schienen, Leitern, Blumentöpfe, zweiteilige Pflanzen und Blöcke mit Inventar.
+
 > Hinweis: Die Mod muss auf Client **und** Server installiert sein. Entfernt man sie, werden vertikale Stufen wieder zu normalen Stufen.
 
 ## Installation

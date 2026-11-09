@@ -154,13 +154,17 @@ public final class Clusters {
 		BlockState clicked = level.getBlockState(pos);
 		Block adding = item.getBlock();
 		int quarter = quarterAt(hit.getLocation(), pos);
+		BlockState addingState = placementState(adding, level, pos);
+		if (addingState == null) {
+			return InteractionResult.PASS;
+		}
 
 		if (clicked.is(BLOCK) && level.getBlockEntity(pos) instanceof ClusterBlockEntity cluster) {
 			int slot = freeSlotNear(cluster, quarter);
 			if (slot < 0) {
 				return InteractionResult.PASS;
 			}
-			cluster.set(slot, adding.defaultBlockState());
+			cluster.set(slot, addingState);
 		} else if (isEligible(clicked.getBlock())) {
 			if (clicked.is(adding) && VANILLA_STACKING.stream().anyMatch(clicked::hasProperty)) {
 				return InteractionResult.PASS; // candles, sea pickles … keep their own stacking
@@ -174,7 +178,7 @@ public final class Clusters {
 				return InteractionResult.FAIL;
 			}
 			cluster.set(3 - quarter, clicked);
-			cluster.set(quarter, adding.defaultBlockState());
+			cluster.set(quarter, addingState);
 		} else {
 			return InteractionResult.PASS;
 		}
@@ -185,6 +189,21 @@ public final class Clusters {
 			stack.shrink(1);
 		}
 		return InteractionResult.SUCCESS;
+	}
+
+	/** The state the small block would have in this space, or null if it cannot stand/hang there. */
+	private static @org.jspecify.annotations.Nullable BlockState placementState(Block block, Level level, BlockPos pos) {
+		BlockState state = block.defaultBlockState();
+		if (state.canSurvive(level, pos)) {
+			return state;
+		}
+		if (state.hasProperty(BlockStateProperties.HANGING)) {
+			BlockState hanging = state.setValue(BlockStateProperties.HANGING, true);
+			if (hanging.canSurvive(level, pos)) {
+				return hanging;
+			}
+		}
+		return null;
 	}
 
 	private static int freeSlotNear(ClusterBlockEntity cluster, int preferred) {
