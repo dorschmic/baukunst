@@ -16,6 +16,17 @@ Alle Stufen aus Vanilla-Minecraft (101 Stück – Holz, Stein, Ziegel, Kupfer, �
 - Zwei gleiche vertikale Stufen ergeben zusammen einen ganzen Block – wie bei normalen Stufen.
 - Hitbox, Kollision, Wasser­logging und Drops funktionieren wie bei normalen Stufen.
 
+### Mini-Blöcke
+![Mini-Blöcke](docs/mini_blocks.png)
+
+Jeder volle 1:1-Block aus Vanilla (404 Stück – Stein, Holz, Erze, Glas, Wolle, Beton, Laub, Kürbis, …)
+gibt es zusätzlich als **Mini-Block** in Spielerkopf-Größe.
+
+- **Bekommen:** In der **Steinsäge** wird aus 1 Block → 4 Mini-Blöcke. Im Kreativmodus gibt es alle im Tab **„Mini-Blöcke“**.
+- **Platzieren wie ein Spielerkopf:** Auf dem Boden in 16 Drehrichtungen (die Vorderseite schaut zu dir) oder seitlich an eine Wand geklickt hängend.
+- Die Mini-Blöcke nutzen automatisch das Original-Modell und die Texturen des Blocks (inkl. Gras-/Laubfarbe je nach Biom, Glas durchsichtig, Leuchtblöcke leuchten).
+- Abbauen geht mit der Hand, sie droppen sich selbst.
+
 > Hinweis: Die Mod muss auf Client **und** Server installiert sein. Entfernt man sie, werden vertikale Stufen wieder zu normalen Stufen.
 
 ## Installation
@@ -38,7 +49,13 @@ Die Blockstate-Dateien für die Stufen werden aus den Vanilla-Daten erzeugt:
 python3 scripts/generate_slab_blockstates.py
 ```
 
-Nach einem Minecraft-Update dieses Skript erneut ausführen.
+Item-Modelle und Steinsägen-Rezepte der Mini-Blöcke erzeugt der Datengenerator (`src/main/generated`):
+
+```bash
+./gradlew runDatagen
+```
+
+Nach einem Minecraft-Update beides erneut ausführen.
 
 ## Lizenz
 MIT

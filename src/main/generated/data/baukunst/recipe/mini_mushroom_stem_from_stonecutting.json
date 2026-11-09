@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:mushroom_stem",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_mushroom_stem"
+  }
+}

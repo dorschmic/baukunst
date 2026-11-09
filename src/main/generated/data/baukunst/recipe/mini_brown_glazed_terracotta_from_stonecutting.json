@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:brown_glazed_terracotta",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_brown_glazed_terracotta"
+  }
+}

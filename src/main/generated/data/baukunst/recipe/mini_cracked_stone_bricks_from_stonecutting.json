@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cracked_stone_bricks",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_cracked_stone_bricks"
+  }
+}

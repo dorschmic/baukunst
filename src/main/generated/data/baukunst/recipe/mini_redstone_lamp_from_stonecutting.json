@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:redstone_lamp",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_redstone_lamp"
+  }
+}

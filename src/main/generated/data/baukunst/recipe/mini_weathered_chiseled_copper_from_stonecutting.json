@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:weathered_chiseled_copper",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_weathered_chiseled_copper"
+  }
+}

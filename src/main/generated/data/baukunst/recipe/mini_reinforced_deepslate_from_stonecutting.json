@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:reinforced_deepslate",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_reinforced_deepslate"
+  }
+}

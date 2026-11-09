@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:rooted_dirt",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_rooted_dirt"
+  }
+}

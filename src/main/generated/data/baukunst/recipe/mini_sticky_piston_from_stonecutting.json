@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:sticky_piston",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_sticky_piston"
+  }
+}

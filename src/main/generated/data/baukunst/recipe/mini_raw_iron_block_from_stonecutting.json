@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:raw_iron_block",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_raw_iron_block"
+  }
+}

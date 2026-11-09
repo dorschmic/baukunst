@@ -4,7 +4,9 @@
 	"version": "${version}",
 	"name": "Baukunst",
 	"description": "Kleine Helfer zum schöner Bauen – z. B. vertikale (seitliche) Stufen für alle Slabs.",
-	"authors": ["dorschmic"],
+	"authors": [
+		"dorschmic"
+	],
 	"contact": {
 		"sources": "https://github.com/dorschmic/baukunst"
 	},
@@ -12,10 +14,19 @@
 	"icon": "assets/baukunst/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": ["de.dorschmic.baukunst.Baukunst"],
-		"client": ["de.dorschmic.baukunst.client.BaukunstClient"]
+		"main": [
+			"de.dorschmic.baukunst.Baukunst"
+		],
+		"client": [
+			"de.dorschmic.baukunst.client.BaukunstClient"
+		],
+		"fabric-datagen": [
+			"de.dorschmic.baukunst.datagen.BaukunstDataGenerator"
+		]
 	},
-	"mixins": ["baukunst.mixins.json"],
+	"mixins": [
+		"baukunst.mixins.json"
+	],
 	"depends": {
 		"fabricloader": ">=0.20.1",
 		"minecraft": "~26.3",

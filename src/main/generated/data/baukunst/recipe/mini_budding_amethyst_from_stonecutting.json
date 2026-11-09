@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:budding_amethyst",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_budding_amethyst"
+  }
+}

@@ -5,7 +5,10 @@
 	"name": "Baukunst Tests",
 	"environment": "*",
 	"entrypoints": {
-		"fabric-client-gametest": ["de.dorschmic.baukunst.test.VerticalSlabClientTest"]
+		"fabric-client-gametest": [
+			"de.dorschmic.baukunst.test.VerticalSlabClientTest",
+			"de.dorschmic.baukunst.test.MiniBlockClientTest"
+		]
 	},
 	"depends": {
 		"baukunst": "*"

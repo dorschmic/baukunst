@@ -2,5 +2,7 @@
 	"key.category.baukunst.baukunst": "Baukunst",
 	"key.baukunst.toggle_vertical_slabs": "Vertikale Stufen umschalten",
 	"message.baukunst.vertical_slabs.on": "Vertikale Stufen: AN",
-	"message.baukunst.vertical_slabs.off": "Vertikale Stufen: AUS"
+	"message.baukunst.vertical_slabs.off": "Vertikale Stufen: AUS",
+	"block.baukunst.mini": "Mini-%s",
+	"itemGroup.baukunst.mini_blocks": "Mini-Blöcke"
 }

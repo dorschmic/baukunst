@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:deepslate_lapis_ore",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_deepslate_lapis_ore"
+  }
+}

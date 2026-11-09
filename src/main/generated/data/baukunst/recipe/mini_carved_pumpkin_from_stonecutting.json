@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:carved_pumpkin",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_carved_pumpkin"
+  }
+}

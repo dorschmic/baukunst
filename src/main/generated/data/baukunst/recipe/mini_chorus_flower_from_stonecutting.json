@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:chorus_flower",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_chorus_flower"
+  }
+}

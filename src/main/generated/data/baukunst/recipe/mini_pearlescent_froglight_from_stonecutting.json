@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:pearlescent_froglight",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_pearlescent_froglight"
+  }
+}

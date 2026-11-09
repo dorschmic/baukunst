@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:light_blue_concrete_powder",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_light_blue_concrete_powder"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:moss_block",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_moss_block"
+  }
+}

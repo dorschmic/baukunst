@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:spruce_log",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_spruce_log"
+  }
+}

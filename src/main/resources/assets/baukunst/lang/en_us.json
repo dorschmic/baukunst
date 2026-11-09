@@ -2,5 +2,7 @@
 	"key.category.baukunst.baukunst": "Baukunst",
 	"key.baukunst.toggle_vertical_slabs": "Toggle vertical slabs",
 	"message.baukunst.vertical_slabs.on": "Vertical slabs: ON",
-	"message.baukunst.vertical_slabs.off": "Vertical slabs: OFF"
+	"message.baukunst.vertical_slabs.off": "Vertical slabs: OFF",
+	"block.baukunst.mini": "Mini %s",
+	"itemGroup.baukunst.mini_blocks": "Mini Blocks"
 }

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:copper_ore",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_copper_ore"
+  }
+}

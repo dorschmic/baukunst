@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cartography_table",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_cartography_table"
+  }
+}

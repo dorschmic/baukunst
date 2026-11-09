@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:hay_block",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_hay_block"
+  }
+}

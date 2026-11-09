@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:crying_obsidian",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_crying_obsidian"
+  }
+}

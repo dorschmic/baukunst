@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:sea_lantern",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_sea_lantern"
+  }
+}

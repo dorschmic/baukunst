@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:deepslate_coal_ore",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_deepslate_coal_ore"
+  }
+}

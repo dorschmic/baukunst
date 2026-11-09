@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cherry_leaves",
+  "result": {
+    "count": 4,
+    "id": "baukunst:mini_cherry_leaves"
+  }
+}
