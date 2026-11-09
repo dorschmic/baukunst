@@ -1,6 +1,5 @@
 package de.dorschmic.baukunst.test;
 
-import de.dorschmic.baukunst.slab.VerticalSlabFacing;
 import de.dorschmic.baukunst.slab.VerticalSlabMode;
 import de.dorschmic.baukunst.slab.VerticalSlabs;
 import java.util.List;
@@ -27,6 +26,24 @@ import net.minecraft.world.phys.Vec3;
 public class VerticalSlabClientTest implements FabricClientGameTest {
 	@Override
 	public void runTest(ClientGameTestContext context) {
+		// Worlds saved before vertical used directions stored "none" for normal slabs: must load as a normal slab.
+		for (String old : new String[] {"none", "north", "west"}) {
+			// Encode a slab with the real codec, then put the old value in, as an old save would have it.
+			net.minecraft.nbt.Tag saved = BlockState.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE,
+					Blocks.OAK_SLAB.defaultBlockState().setValue(VerticalSlabs.VERTICAL, Direction.EAST)).getOrThrow();
+			String text = saved.toString().replace("vertical:\"east\"", "vertical:\"" + old + "\"");
+			check(text.contains(old), "encoded state contains the replaced value: " + text);
+			net.minecraft.nbt.Tag tag;
+			try {
+				tag = net.minecraft.nbt.TagParser.parseCompoundFully(text);
+			} catch (Exception e) {
+				throw new AssertionError("FAILED: parse " + text, e);
+			}
+			BlockState loaded = BlockState.CODEC.parse(net.minecraft.nbt.NbtOps.INSTANCE, tag).getOrThrow();
+			Direction expected = old.equals("none") ? VerticalSlabs.NONE : Direction.byName(old);
+			check(loaded.is(Blocks.OAK_SLAB) && loaded.getValue(VerticalSlabs.VERTICAL) == expected,
+					"old save vertical=" + old + " loads as " + loaded);
+		}
 		try (TestSingleplayerContext world = context.worldBuilder().create()) {
 			world.getConnection().waitForChunksRender();
 			world.getServer().runCommand("time set noon");
@@ -47,21 +64,21 @@ public class VerticalSlabClientTest implements FabricClientGameTest {
 				BlockPos target = base.east();
 				place(level, player, Blocks.OAK_SLAB, base, Direction.EAST, new Vec3(base.getX() + 1, base.getY() + 0.5, base.getZ() + 0.5));
 				BlockState s = level.getBlockState(target);
-				check(s.is(Blocks.OAK_SLAB) && s.getValue(VerticalSlabs.VERTICAL) == VerticalSlabFacing.WEST
+				check(s.is(Blocks.OAK_SLAB) && s.getValue(VerticalSlabs.VERTICAL) == Direction.WEST
 						&& s.getValue(SlabBlock.TYPE) == SlabType.BOTTOM, "side click -> vertical west, got " + s);
 				check(s.getShape(level, target).bounds().maxX == 0.5, "vertical shape covers west half");
 
 				// 3) Click the open inner face with the same slab -> merges into a full block.
 				place(level, player, Blocks.OAK_SLAB, target, Direction.EAST, new Vec3(target.getX() + 0.5, target.getY() + 0.5, target.getZ() + 0.5));
 				s = level.getBlockState(target);
-				check(s.getValue(SlabBlock.TYPE) == SlabType.DOUBLE && s.getValue(VerticalSlabs.VERTICAL) == VerticalSlabFacing.NONE,
+				check(s.getValue(SlabBlock.TYPE) == SlabType.DOUBLE && s.getValue(VerticalSlabs.VERTICAL) == VerticalSlabs.NONE,
 						"merge -> double, got " + s);
 
 				// 4) Click the top of a block near its north edge -> north half.
 				BlockPos top = base.above();
 				place(level, player, Blocks.STONE_BRICK_SLAB, base, Direction.UP, new Vec3(base.getX() + 0.5, base.getY() + 1, base.getZ() + 0.1));
 				s = level.getBlockState(top);
-				check(s.getValue(VerticalSlabs.VERTICAL) == VerticalSlabFacing.NORTH, "top click near north edge -> north, got " + s);
+				check(s.getValue(VerticalSlabs.VERTICAL) == Direction.NORTH, "top click near north edge -> north, got " + s);
 			});
 
 			// 5) Toggle off -> vanilla behaviour again.
@@ -74,7 +91,7 @@ public class VerticalSlabClientTest implements FabricClientGameTest {
 				level.setBlockAndUpdate(base, Blocks.STONE.defaultBlockState());
 				place(level, player, Blocks.OAK_SLAB, base, Direction.EAST, new Vec3(base.getX() + 1, base.getY() + 0.2, base.getZ() + 0.5));
 				BlockState s = level.getBlockState(base.east());
-				check(s.getValue(VerticalSlabs.VERTICAL) == VerticalSlabFacing.NONE && s.getValue(SlabBlock.TYPE) == SlabType.BOTTOM,
+				check(s.getValue(VerticalSlabs.VERTICAL) == VerticalSlabs.NONE && s.getValue(SlabBlock.TYPE) == SlabType.BOTTOM,
 						"mode off -> normal bottom slab, got " + s);
 			});
 
@@ -85,7 +102,7 @@ public class VerticalSlabClientTest implements FabricClientGameTest {
 				BlockPos origin = player.blockPosition().offset(-4, 0, -6);
 				List<Block> slabs = List.<Block>of(Blocks.OAK_SLAB, Blocks.SPRUCE_SLAB, Blocks.STONE_BRICK_SLAB, Blocks.QUARTZ_SLAB,
 						Blocks.BRICK_SLAB, Blocks.CHERRY_SLAB, Blocks.SMOOTH_STONE_SLAB, Blocks.MUD_BRICK_SLAB);
-				VerticalSlabFacing[] facings = {VerticalSlabFacing.NORTH, VerticalSlabFacing.EAST, VerticalSlabFacing.SOUTH, VerticalSlabFacing.WEST};
+				Direction[] facings = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 				for (int i = 0; i < slabs.size(); i++) {
 					for (int y = 0; y < 3; y++) {
 						BlockState st = slabs.get(i).defaultBlockState().setValue(VerticalSlabs.VERTICAL, facings[(i + y) % 4]);

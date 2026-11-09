@@ -7,7 +7,6 @@ import de.dorschmic.baukunst.mini.MiniBlocks;
 import de.dorschmic.baukunst.mini.MiniGrid;
 import de.dorschmic.baukunst.mini.MiniGridBlockEntity;
 import de.dorschmic.baukunst.shapes.ShapedBlocks;
-import de.dorschmic.baukunst.slab.VerticalSlabFacing;
 import de.dorschmic.baukunst.slab.VerticalSlabs;
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
@@ -48,7 +47,7 @@ public class WorldEditClientTest implements FabricClientGameTest {
 				BlockPos o = server.getPlayerList().getPlayers().getFirst().blockPosition().offset(10, 5, 10);
 				Block dirtStairs = BuiltInRegistries.BLOCK.getValue(ShapedBlocks.idFor(Blocks.DIRT, ShapedBlocks.Kind.STAIRS));
 				Block miniStone = BuiltInRegistries.BLOCK.getValue(MiniBlocks.idFor(Blocks.STONE));
-				level.setBlockAndUpdate(o, Blocks.OAK_SLAB.defaultBlockState().setValue(VerticalSlabs.VERTICAL, VerticalSlabFacing.NORTH));
+				level.setBlockAndUpdate(o, Blocks.OAK_SLAB.defaultBlockState().setValue(VerticalSlabs.VERTICAL, Direction.NORTH));
 				level.setBlockAndUpdate(o.east(), dirtStairs.defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH));
 				level.setBlockAndUpdate(o.east(2), miniStone.defaultBlockState().setValue(MiniBlock.ROTATION, 0));
 				level.setBlockAndUpdate(o.south(), MiniGrid.BLOCK.defaultBlockState());
@@ -59,7 +58,7 @@ public class WorldEditClientTest implements FabricClientGameTest {
 				level.setBlockAndUpdate(o.south().east(), Clusters.BLOCK.defaultBlockState());
 				ClusterBlockEntity cluster = (ClusterBlockEntity) level.getBlockEntity(o.south().east());
 				cluster.set(0, Blocks.LANTERN.defaultBlockState());
-				cluster.set(3, Blocks.END_ROD.defaultBlockState());
+				cluster.set(3, Blocks.END_ROD.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.EAST));
 				return o;
 			});
 
@@ -67,6 +66,7 @@ public class WorldEditClientTest implements FabricClientGameTest {
 			BlockPos copyTo = origin.offset(2, 0, 1);
 			BlockPos plain = origin.offset(0, 0, 10);
 			BlockPos rotated = origin.offset(0, 0, 20);
+			BlockPos flipped = origin.offset(0, 0, 30);
 			tp(context, world, copyFrom);
 			cmd(context, world, "/pos1 " + coords(copyFrom));
 			cmd(context, world, "/pos2 " + coords(copyTo));
@@ -76,6 +76,11 @@ public class WorldEditClientTest implements FabricClientGameTest {
 			tp(context, world, rotated);
 			cmd(context, world, "/rotate 90");
 			cmd(context, world, "/paste");
+			tp(context, world, copyFrom);
+			cmd(context, world, "/copy");
+			tp(context, world, flipped);
+			cmd(context, world, "/flip east");
+			cmd(context, world, "/paste");
 			context.waitTicks(20);
 
 			world.getServer().runOnServer(server -> {
@@ -84,6 +89,7 @@ public class WorldEditClientTest implements FabricClientGameTest {
 				dump("pasted", level, plain);
 				// Rotating 90° clockwise around the copy origin: (x, z) -> (-z, x)
 				dump("rotated 90", level, rotated);
+				dump("flipped", level, flipped);
 
 				// Plain copy & paste keeps everything, including the contents of mini grids and clusters.
 				for (BlockPos rel : new BlockPos[] {BlockPos.ZERO, new BlockPos(1, 0, 0), new BlockPos(2, 0, 0),
@@ -96,9 +102,23 @@ public class WorldEditClientTest implements FabricClientGameTest {
 				// Rotating by 90° clockwise: (x, z) -> (-z, x).
 				check(level.getBlockState(rotated.offset(0, 0, 1)).getValue(StairBlock.FACING) == Direction.EAST, "stairs rotate");
 				check(level.getBlockState(rotated.offset(0, 0, 2)).getValue(MiniBlock.ROTATION) == 4, "mini block rotates");
-				// Known limitations, only reported (see README):
-				System.out.println("[WE] vertical slab after rotation: " + level.getBlockState(rotated).getValue(VerticalSlabs.VERTICAL)
-						+ " (east would be correct)");
+				check(level.getBlockState(rotated).getValue(VerticalSlabs.VERTICAL) == Direction.EAST, "vertical slab rotates north -> east");
+				// Grid contents turn along: planks (0,0,0),(1,0,0) -> (1,0,0),(1,0,1); gold (0,1,0) -> (1,1,0).
+				MiniGridBlockEntity rg = (MiniGridBlockEntity) level.getBlockEntity(rotated.offset(-1, 0, 0));
+				check(rg.mask() == ((1 << 1) | (1 << 5) | (1 << 3)) && rg.get(3) == Blocks.GOLD_BLOCK,
+						"grid contents rotate, mask=" + Integer.toBinaryString(rg.mask()));
+				// Cluster: lantern quarter 0 -> 1, end rod quarter 3 -> 2 and pointing south instead of east.
+				ClusterBlockEntity rc = (ClusterBlockEntity) level.getBlockEntity(rotated.offset(-1, 0, 1));
+				check(rc.get(1) != null && rc.get(1).is(Blocks.LANTERN) && rc.get(2) != null
+						&& rc.get(2).getValue(BlockStateProperties.FACING) == Direction.SOUTH, "cluster contents rotate");
+
+				// Flip east-west: x -> -x.
+				MiniGridBlockEntity fg = (MiniGridBlockEntity) level.getBlockEntity(flipped.offset(0, 0, 1));
+				check(fg.mask() == 0b1011 && fg.get(3) == Blocks.GOLD_BLOCK, "grid contents mirror, mask=" + Integer.toBinaryString(fg.mask()));
+				ClusterBlockEntity fc = (ClusterBlockEntity) level.getBlockEntity(flipped.offset(-1, 0, 1));
+				check(fc.get(1) != null && fc.get(1).is(Blocks.LANTERN) && fc.get(2) != null
+						&& fc.get(2).getValue(BlockStateProperties.FACING) == Direction.WEST, "cluster contents mirror");
+				check(level.getBlockState(flipped.offset(-1, 0, 0)).getValue(StairBlock.FACING) == Direction.NORTH, "stairs mirror");
 			});
 		}
 	}

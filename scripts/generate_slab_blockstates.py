@@ -56,10 +56,11 @@ def main():
             print(f"skip {name}: unexpected format", file=sys.stderr)
             continue
         out = {}
-        for vertical in ["none", "north", "east", "south", "west"]:
+        # "down" and "up" both mean a normal horizontal slab (see VerticalSlabs.VERTICAL).
+        for vertical in ["down", "up", "north", "east", "south", "west"]:
             for slab_type in ["bottom", "top", "double"]:
                 key = f"type={slab_type},vertical={vertical}"
-                if vertical == "none" or slab_type == "double":
+                if vertical in ("down", "up") or slab_type == "double":
                     out[key] = variants[f"type={slab_type}"]
                 else:
                     base = variants["type=bottom"]

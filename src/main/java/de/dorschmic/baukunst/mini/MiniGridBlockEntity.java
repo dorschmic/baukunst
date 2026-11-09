@@ -1,6 +1,7 @@
 package de.dorschmic.baukunst.mini;
 
 import java.util.Arrays;
+import de.dorschmic.baukunst.orientation.ContentOrientation;
 import net.fabricmc.fabric.api.blockgetter.v2.RenderDataBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -62,6 +63,7 @@ public class MiniGridBlockEntity extends BlockEntity implements RenderDataBlockE
 	@Override
 	protected void saveAdditional(ValueOutput output) {
 		super.saveAdditional(output);
+		output.putInt("orientation", ContentOrientation.of(getBlockState()).encode());
 		for (int i = 0; i < 8; i++) {
 			if (slots[i] != null) {
 				output.putString("slot" + i, BuiltInRegistries.BLOCK.getKey(slots[i]).toString());
@@ -78,10 +80,29 @@ public class MiniGridBlockEntity extends BlockEntity implements RenderDataBlockE
 					.flatMap(BuiltInRegistries.BLOCK::getOptional)
 					.orElse(null);
 		}
+		// Contents stored while the block was turned differently (e.g. pasted rotated by WorldEdit): turn them along.
+		ContentOrientation stored = input.getInt("orientation").map(ContentOrientation::decode)
+				.orElse(ContentOrientation.of(getBlockState()));
+		remap(stored, ContentOrientation.of(getBlockState()));
 		if (level != null && level.isClientSide()) {
 			// New contents arrived from the server: rebuild the chunk mesh.
 			level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
 		}
+	}
+
+	@Override
+	public void setBlockState(BlockState state) {
+		ContentOrientation before = ContentOrientation.of(getBlockState());
+		super.setBlockState(state);
+		ContentOrientation after = ContentOrientation.of(state);
+		if (!before.equals(after)) {
+			remap(before, after);
+			setChanged();
+		}
+	}
+
+	private void remap(ContentOrientation from, ContentOrientation to) {
+		ContentOrientation.remap(slots, from, to, MiniGridBlockEntity::slotIndex, b -> b, b -> b);
 	}
 
 	@Override

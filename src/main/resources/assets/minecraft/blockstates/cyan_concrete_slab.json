@@ -1,12 +1,21 @@
 {
   "variants": {
-    "type=bottom,vertical=none": {
+    "type=bottom,vertical=down": {
       "model": "minecraft:block/cyan_concrete_slab"
     },
-    "type=top,vertical=none": {
+    "type=top,vertical=down": {
       "model": "minecraft:block/cyan_concrete_slab_top"
     },
-    "type=double,vertical=none": {
+    "type=double,vertical=down": {
+      "model": "minecraft:block/cyan_concrete"
+    },
+    "type=bottom,vertical=up": {
+      "model": "minecraft:block/cyan_concrete_slab"
+    },
+    "type=top,vertical=up": {
+      "model": "minecraft:block/cyan_concrete_slab_top"
+    },
+    "type=double,vertical=up": {
       "model": "minecraft:block/cyan_concrete"
     },
     "type=bottom,vertical=north": {

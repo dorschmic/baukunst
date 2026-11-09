@@ -1,6 +1,5 @@
 package de.dorschmic.baukunst.mixin;
 
-import de.dorschmic.baukunst.slab.VerticalSlabFacing;
 import de.dorschmic.baukunst.slab.VerticalSlabMode;
 import de.dorschmic.baukunst.slab.VerticalSlabs;
 import net.minecraft.core.BlockPos;
@@ -42,14 +41,14 @@ public abstract class SlabBlockMixin extends Block {
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void baukunst$defaultNotVertical(Properties properties, CallbackInfo ci) {
-		this.registerDefaultState(this.defaultBlockState().setValue(VerticalSlabs.VERTICAL, VerticalSlabFacing.NONE));
+		this.registerDefaultState(this.defaultBlockState().setValue(VerticalSlabs.VERTICAL, VerticalSlabs.NONE));
 	}
 
 	@Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
 	private void baukunst$verticalShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context,
 			CallbackInfoReturnable<VoxelShape> cir) {
-		VerticalSlabFacing facing = state.getValue(VerticalSlabs.VERTICAL);
-		if (facing != VerticalSlabFacing.NONE && state.getValue(SlabBlock.TYPE) != SlabType.DOUBLE) {
+		Direction facing = VerticalSlabs.facing(state);
+		if (facing != null && state.getValue(SlabBlock.TYPE) != SlabType.DOUBLE) {
 			cir.setReturnValue(VerticalSlabs.shape(facing));
 		}
 	}
@@ -62,7 +61,7 @@ public abstract class SlabBlockMixin extends Block {
 		}
 		if (result.getValue(SlabBlock.TYPE) == SlabType.DOUBLE) {
 			// Two halves merged into a full block – it is no longer vertical.
-			cir.setReturnValue(result.setValue(VerticalSlabs.VERTICAL, VerticalSlabFacing.NONE));
+			cir.setReturnValue(result.setValue(VerticalSlabs.VERTICAL, VerticalSlabs.NONE));
 			return;
 		}
 		Player player = context.getPlayer();
@@ -71,15 +70,15 @@ public abstract class SlabBlockMixin extends Block {
 		}
 		BlockPos pos = context.getClickedPos();
 		Vec3 hit = context.getClickLocation();
-		VerticalSlabFacing facing = VerticalSlabs.facingFor(context.getClickedFace(),
+		Direction facing = VerticalSlabs.facingFor(context.getClickedFace(),
 				hit.x - pos.getX(), hit.z - pos.getZ(), context.getHorizontalDirection());
 		cir.setReturnValue(result.setValue(SlabBlock.TYPE, SlabType.BOTTOM).setValue(VerticalSlabs.VERTICAL, facing));
 	}
 
 	@Inject(method = "canBeReplaced", at = @At("HEAD"), cancellable = true)
 	private void baukunst$canMergeVertical(BlockState state, BlockPlaceContext context, CallbackInfoReturnable<Boolean> cir) {
-		VerticalSlabFacing facing = state.getValue(VerticalSlabs.VERTICAL);
-		if (facing == VerticalSlabFacing.NONE || state.getValue(SlabBlock.TYPE) == SlabType.DOUBLE) {
+		Direction facing = VerticalSlabs.facing(state);
+		if (facing == null || state.getValue(SlabBlock.TYPE) == SlabType.DOUBLE) {
 			return;
 		}
 		if (!context.getItemInHand().is(this.asItem())) {
@@ -90,7 +89,7 @@ public abstract class SlabBlockMixin extends Block {
 			cir.setReturnValue(true);
 			return;
 		}
-		Direction half = facing.direction();
+		Direction half = facing;
 		Direction clickedFace = context.getClickedFace();
 		if (clickedFace == half.getOpposite()) {
 			// Clicked the open inner face of the slab.
@@ -106,13 +105,13 @@ public abstract class SlabBlockMixin extends Block {
 
 	@Override
 	protected BlockState rotate(BlockState state, Rotation rotation) {
-		Direction dir = state.getValue(VerticalSlabs.VERTICAL).direction();
-		return dir == null ? state : state.setValue(VerticalSlabs.VERTICAL, VerticalSlabFacing.of(rotation.rotate(dir)));
+		Direction dir = VerticalSlabs.facing(state);
+		return dir == null ? state : state.setValue(VerticalSlabs.VERTICAL, rotation.rotate(dir));
 	}
 
 	@Override
 	protected BlockState mirror(BlockState state, Mirror mirror) {
-		Direction dir = state.getValue(VerticalSlabs.VERTICAL).direction();
-		return dir == null ? state : state.setValue(VerticalSlabs.VERTICAL, VerticalSlabFacing.of(mirror.mirror(dir)));
+		Direction dir = VerticalSlabs.facing(state);
+		return dir == null ? state : state.setValue(VerticalSlabs.VERTICAL, mirror.mirror(dir));
 	}
 }

@@ -1,7 +1,6 @@
 package de.dorschmic.baukunst.test;
 
 import de.dorschmic.baukunst.shapes.ShapedBlocks;
-import de.dorschmic.baukunst.slab.VerticalSlabFacing;
 import de.dorschmic.baukunst.slab.VerticalSlabs;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +80,7 @@ public class ShapedBlockClientTest implements FabricClientGameTest {
 					level.setBlockAndUpdate(col.north().east(), shaped(sources[i], ShapedBlocks.Kind.STAIRS).defaultBlockState()
 							.setValue(StairBlock.FACING, Direction.WEST));
 					level.setBlockAndUpdate(col.north(2), shaped(sources[i], ShapedBlocks.Kind.SLAB).defaultBlockState()
-							.setValue(VerticalSlabs.VERTICAL, VerticalSlabFacing.NORTH));
+							.setValue(VerticalSlabs.VERTICAL, Direction.NORTH));
 					level.setBlockAndUpdate(col.north(2).above(), shaped(sources[i], ShapedBlocks.Kind.SLAB).defaultBlockState()
 							.setValue(SlabBlock.TYPE, SlabType.TOP));
 				}

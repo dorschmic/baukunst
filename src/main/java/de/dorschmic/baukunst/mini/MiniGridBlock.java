@@ -1,8 +1,15 @@
 package de.dorschmic.baukunst.mini;
 
+import de.dorschmic.baukunst.orientation.ContentOrientation;
+import de.dorschmic.baukunst.orientation.Handedness;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -36,6 +43,26 @@ public class MiniGridBlock extends Block implements EntityBlock {
 
 	public MiniGridBlock(Properties properties) {
 		super(properties);
+		registerDefaultState(stateDefinition.any()
+				.setValue(ContentOrientation.FACING, Direction.NORTH)
+				.setValue(ContentOrientation.MIRROR, Handedness.LEFT)
+				.setValue(ContentOrientation.HALF, Half.BOTTOM));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		// Only describe how the contents are turned, so rotation tools (WorldEdit, structures) can turn them.
+		builder.add(ContentOrientation.FACING, ContentOrientation.MIRROR, ContentOrientation.HALF);
+	}
+
+	@Override
+	protected BlockState rotate(BlockState state, Rotation rotation) {
+		return ContentOrientation.rotate(state, rotation);
+	}
+
+	@Override
+	protected BlockState mirror(BlockState state, Mirror mirror) {
+		return ContentOrientation.mirror(state, mirror);
 	}
 
 	@Override

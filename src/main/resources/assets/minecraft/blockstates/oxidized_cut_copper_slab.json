@@ -1,12 +1,21 @@
 {
   "variants": {
-    "type=bottom,vertical=none": {
+    "type=bottom,vertical=down": {
       "model": "minecraft:block/oxidized_cut_copper_slab"
     },
-    "type=top,vertical=none": {
+    "type=top,vertical=down": {
       "model": "minecraft:block/oxidized_cut_copper_slab_top"
     },
-    "type=double,vertical=none": {
+    "type=double,vertical=down": {
+      "model": "minecraft:block/oxidized_cut_copper"
+    },
+    "type=bottom,vertical=up": {
+      "model": "minecraft:block/oxidized_cut_copper_slab"
+    },
+    "type=top,vertical=up": {
+      "model": "minecraft:block/oxidized_cut_copper_slab_top"
+    },
+    "type=double,vertical=up": {
       "model": "minecraft:block/oxidized_cut_copper"
     },
     "type=bottom,vertical=north": {

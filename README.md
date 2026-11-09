@@ -57,6 +57,12 @@ ein Stück pro Viertel (wie Laubstreu oder Rosa Blütenblätter).
 - Ausgenommen sind Blöcke, die breiter als ein Viertel sind (Setzlinge, Farne, Gras), wachsende Pflanzen, Zäune, Mauern,
   Glasscheiben, Redstone-Teile, Schienen, Leitern, Blumentöpfe, zweiteilige Pflanzen und Blöcke mit Inventar.
 
+### WorldEdit
+Alle Blöcke der Mod funktionieren mit [WorldEdit](https://modrinth.com/plugin/worldedit) (getestet mit 7.4.6):
+`//copy`, `//paste`, `//set`, Undo – und auch **`//rotate`** und **`//flip`**. Vertikale Stufen, Treppen und Mini-Blöcke
+drehen sich mit, und Mini-Raster und Kleinkram-Felder drehen bzw. spiegeln auch ihren Inhalt. Das klappt genauso mit
+Strukturblöcken. WorldEdit ist dafür keine Voraussetzung; in `runClient` wird es zum Testen automatisch mitgeladen.
+
 > Hinweis: Die Mod muss auf Client **und** Server installiert sein. Entfernt man sie, werden vertikale Stufen wieder zu normalen Stufen.
 
 ## Installation

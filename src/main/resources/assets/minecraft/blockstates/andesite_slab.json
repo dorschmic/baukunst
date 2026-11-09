@@ -1,12 +1,21 @@
 {
   "variants": {
-    "type=bottom,vertical=none": {
+    "type=bottom,vertical=down": {
       "model": "minecraft:block/andesite_slab"
     },
-    "type=top,vertical=none": {
+    "type=top,vertical=down": {
       "model": "minecraft:block/andesite_slab_top"
     },
-    "type=double,vertical=none": {
+    "type=double,vertical=down": {
+      "model": "minecraft:block/andesite"
+    },
+    "type=bottom,vertical=up": {
+      "model": "minecraft:block/andesite_slab"
+    },
+    "type=top,vertical=up": {
+      "model": "minecraft:block/andesite_slab_top"
+    },
+    "type=double,vertical=up": {
       "model": "minecraft:block/andesite"
     },
     "type=bottom,vertical=north": {

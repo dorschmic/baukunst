@@ -1,5 +1,7 @@
 package de.dorschmic.baukunst.cluster;
 
+import de.dorschmic.baukunst.orientation.ContentOrientation;
+import de.dorschmic.baukunst.orientation.Handedness;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -12,6 +14,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,7 +36,9 @@ public class ClusterBlock extends Block implements EntityBlock {
 
 	public ClusterBlock(Properties properties) {
 		super(properties);
-		registerDefaultState(stateDefinition.any().setValue(LIGHT, 0));
+		registerDefaultState(stateDefinition.any().setValue(LIGHT, 0)
+				.setValue(ContentOrientation.FACING, Direction.NORTH)
+				.setValue(ContentOrientation.MIRROR, Handedness.LEFT));
 	}
 
 	/** X/Z offset of a quarter's centre relative to the block centre. */
@@ -46,7 +52,18 @@ public class ClusterBlock extends Block implements EntityBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(LIGHT);
+		// FACING / MIRROR only describe how the contents are turned, so rotation tools can turn them.
+		builder.add(LIGHT, ContentOrientation.FACING, ContentOrientation.MIRROR);
+	}
+
+	@Override
+	protected BlockState rotate(BlockState state, Rotation rotation) {
+		return ContentOrientation.rotate(state, rotation);
+	}
+
+	@Override
+	protected BlockState mirror(BlockState state, Mirror mirror) {
+		return ContentOrientation.mirror(state, mirror);
 	}
 
 	@Override
